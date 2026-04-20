@@ -1,0 +1,15 @@
+FROM node:20
+WORKDIR /app
+
+
+COPY FRONT-END/package*.json ./
+RUN npm install
+
+COPY FRONT-END/ .
+
+
+RUN npx prisma generate
+
+EXPOSE 5000
+
+CMD ["npm", "run", "dev"]

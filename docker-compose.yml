@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:80" # Nginx รันที่พอร์ต 80 ข้างใน container
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "5000:5000"
+    restart: always 
+    volumes:
+      - ./FRONT-END:/app
+      - /app/node_modules # ปล่อยอันนี้ไว้เพื่อไม่ให้ node_modules โดนทับ
+    environment:
+      - DATABASE_URL=file:./prisma/dev.db
