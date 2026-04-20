@@ -1,0 +1,22 @@
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: "class",
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}", // เพิ่มอันนี้กันเหนียว
+    "./*.{js,ts,jsx,tsx,mdx}",      // รวมไฟล์ที่อยู่ที่ Root ด้วย
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        "primary-blue": "#2563eb",
+      },
+    },
+  },
+  plugins: [],
+};

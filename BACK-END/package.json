@@ -1,5 +1,5 @@
 {
-  "name": "FRONT-END",
+  "name": "BACK-END",
   "version": "1.0.0",
   "main": "index.js",
  "scripts": {
@@ -7,6 +7,9 @@
   "build": "tsc",
   "start": "node dist/index.js"
 },
+ "prisma": {
+    "seed": "node prisma/seed-data.mjs"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

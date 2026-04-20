@@ -6,7 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
     ports:
-      - "3000:80" # Nginx รันที่พอร์ต 80 ข้างใน container
+      - "3000:3000"
+    # ✅ เพิ่มส่วนนี้เข้าไป
+    extra_hosts:
+      - "localhost:host-gateway" 
     depends_on:
       - backend
 
@@ -16,9 +19,12 @@ services:
       dockerfile: Dockerfile.backend
     ports:
       - "5000:5000"
+    # ✅ เพิ่มส่วนนี้เข้าไปด้วยเพื่อให้ Backend คุยกับ DB ผ่าน localhost ได้ (ถ้าจำเป็น)
+    extra_hosts:
+      - "localhost:host-gateway"
     restart: always 
     volumes:
-      - ./FRONT-END:/app
-      - /app/node_modules # ปล่อยอันนี้ไว้เพื่อไม่ให้ node_modules โดนทับ
+      - ./BACK-END:/app
+      - /app/node_modules 
     environment:
       - DATABASE_URL=file:./prisma/dev.db

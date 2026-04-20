@@ -1,15 +1,20 @@
-FROM node:20
+FROM node:20-alpine
+
 WORKDIR /app
 
+# ก๊อปปี้ไฟล์ package.json จากโฟลเดอร์ BACK-END (ตรวจสอบชื่อโฟลเดอร์ให้ตรงกับเครื่องคุณ)
+COPY BACK-END/package*.json ./
 
-COPY FRONT-END/package*.json ./
 RUN npm install
 
-COPY FRONT-END/ .
+# ก๊อปปี้ไฟล์โค้ดทั้งหมดของ Backend
+COPY BACK-END/ .
 
-
+# รัน Prisma Generate
 RUN npx prisma generate
 
 EXPOSE 5000
 
+# ใช้ npm run dev ถ้าคุณต้องการแก้ไขโค้ดแล้วอัปเดต (Development)
+# หรือใช้ node dist/index.js (Production) - แต่ใน Docker Compose มักใช้ dev
 CMD ["npm", "run", "dev"]

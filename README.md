@@ -9,9 +9,19 @@
 
 ## Tech Stack ##
 ### Frontend
-- ** Framework: React (Vite)
-- ** UI Components: Tailwind CSS, Lucide React
-- ** Visualization: React Three Fiber (3D SCADA), Recharts
+Framework: Next.js (App Router)
+
+State Management: TanStack Query v5
+
+Form Handling: React Hook Form
+
+Validation: Zod
+
+Styling: Tailwind CSS
+
+Icons: Lucide React
+
+Notifications: Sonner
 - ** State Management: React Hook Form
 ### Backend
 - ** Runtime: Node.js (Express)
@@ -33,36 +43,14 @@
 ## 📋 Project Structure
 
 ```
-FRONT-END/
-├── client/                    # Frontend React application
-│   ├── public/               # Static assets (favicon, robots.txt)
-│   ├── src/
-│   │   ├── pages/           # Page components
-│   │   │   ├── Home.tsx     # Broker list with search/filter
-│   │   │   ├── CreateBroker.tsx  # Form to create new broker
-│   │   │   ├── BrokerDetail.tsx  # Single broker detail view
-│   │   │   
-│   │   ├── components/      # Reusable UI components
-│   │   │   ├── Navigation.tsx    # Top navigation bar
-│   │   │   ├── ErrorBoundary.tsx
-│   │   │   └── ui/          # shadcn/ui components
-│   │   ├── contexts/        # React contexts
-│   │   ├── hooks/           # Custom React hooks
-│   │   ├── App.tsx          # Root app component with routing
-│   │   ├── main.tsx         # Entry point
-│   │   └── index.css        # Global styles and typography
-│   └── index.html
-├── server/                   # Backend Express + tRPC server
-│   
-│   ├── db.ts               # Database query helpers
-│   ├── routers.ts          # tRPC procedure definitions
-│   ├── brokers.test.ts     # Broker API tests
-│   └── auth.logout.test.ts # Auth tests
-├── package.json            # Dependencies and scripts
-├── tsconfig.json           # TypeScript configuration
-├── vite.config.ts          # Vite configuration
-├── tailwind.config.ts      # Tailwind CSS configuration
-└── drizzle.config.ts       # Drizzle ORM configuration
+├── app/
+│   ├── layout.tsx       # Root layout และ QueryClientProvider
+│   ├── page.tsx         # หน้าหลัก (Broker List)
+│   ├── create/          # หน้าสำหรับสร้างโบรกเกอร์
+│   └── providers.tsx    # TanStack Query & Toast Providers
+├── components/          # UI Components ต่างๆ
+├── hooks/               # Custom React Hooks
+└── types/               # Type Definitions (Zod Schemas)
 ```
 
 ## 🚀 Getting Started

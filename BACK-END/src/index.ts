@@ -8,10 +8,7 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-/**
- * 1. GET /api/brokers : ดึงข้อมูลทั้งหมด + Search & Filter
- * ตัวอย่าง: /api/brokers?search=capital&type=cfd
- */
+
 app.get("/api/brokers", async (req, res) => {
     try {
         
@@ -78,23 +75,15 @@ app.get("/api/brokers/:slug", async (req, res) => {
  */
 app.post("/api/brokers", async (req, res) => {
     try {
-        const data = req.body;
         const newBroker = await prisma.brokers.create({
-            data: {
-                name: data.name,
-                slug: data.slug,
-                description: data.description,
-                logo_url: data.logo_url,
-                website: data.website,
-                broker_type: data.broker_type,
-                // ใส่ค่า Default สำหรับฟิลด์ที่ Database บังคับแต่ในฟอร์มยังไม่มี
-                
-               
-               
-            }
+            data: req.body, // หาก field ใน body ตรงกับ schema สามารถส่งเข้าไปตรงๆ ได้เลย
         });
         res.status(201).json(newBroker);
     } catch (error: any) {
+        // เช็คกรณี Slug ซ้ำ (Unique constraint)
+        if (error.code === 'P2002') {
+            return res.status(400).json({ error: "Slug นี้มีอยู่ในระบบแล้ว" });
+        }
         res.status(400).json({ error: error.message });
     }
 });

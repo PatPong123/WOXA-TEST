@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  /* กำหนดตัวแปรสีให้ระบบ Tailwind v4 รู้จัก */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary-blue: #2563eb;
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+
+  .dark {
+    --background: #031b44;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
