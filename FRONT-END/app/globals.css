@@ -9,8 +9,8 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #171717;
+    --background: #0c0935;
+    --foreground: #ffffff;
   }
 
   .dark {
