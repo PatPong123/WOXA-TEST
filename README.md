@@ -1,6 +1,6 @@
 
 ## Quick Start (Docker) ##
-- ** git clone [<your-repo-url>](https://github.com/PatPong123/WOXA-TEST.git)
+- ** git clone https://github.com/PatPong123/WOXA-TEST.git
 - ** cd broker-management
 - ** docker-compose up --build
 - ** Accessing the App
