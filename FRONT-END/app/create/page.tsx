@@ -40,7 +40,7 @@ export default function CreateBroker() {
 
   const { watch, setValue, register, handleSubmit, formState: { errors, isValid } } = form;
 
- 
+
 
   // 3. API Mutation
   const createMutation = useMutation({
@@ -65,14 +65,14 @@ export default function CreateBroker() {
   const brokerTypes = ["cfd", "bond", "stock", "crypto"];
 
   return (
- <main className="min-h-screen bg-background text-foreground font-sans transition-colors duration-500">
+    <main className="min-h-screen bg-background text-foreground font-sans transition-colors duration-500">
 
       <div className="max-w-3xl mx-auto">
         {/* Header Section */}
         <div className="mb-10 text-center mt-20 md:text-left">
           <h1 className="text-4xl font-bold text-white mb-3">Submit Broker</h1>
           <p className="text-slate-400">
-            Register a new institutional entity within the ecosystem. 
+            Register a new institutional entity within the ecosystem.
             Ensure data aligns with regulatory documentation.
           </p>
         </div>
@@ -80,7 +80,7 @@ export default function CreateBroker() {
         {/* Main Form Card */}
         <div className="bg-[#0c1425] border border-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl">
           <form onSubmit={handleSubmit((v) => createMutation.mutate(v))} className="space-y-8">
-            
+
             {/* Row 1: Name & Slug */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
@@ -97,34 +97,35 @@ export default function CreateBroker() {
                 <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-500">slug</label>
                 <input
                   {...register("slug")}
-                  
+
                   placeholder="sterling-capital"
-                    className="w-full bg-[#161f32] border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-all"
+                  className="w-full bg-[#161f32] border border-slate-700 rounded-lg p-3 outline-none focus:border-blue-500 transition-all"
                 />
               </div>
             </div>
 
             {/* Row 2: Broker Type Selection */}
             <div className="space-y-3">
-              <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-500">Broker Type</label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {brokerTypes.map((type) => {
-                  const isSelected = watch("broker_type") === type;
-                  return (
-                    <button
-                      key={type}
-                      type="button"
-                      onClick={() => setValue("broker_type", type as any, { shouldValidate: true })}
-                      className={`py-3 rounded-lg text-xs font-bold uppercase transition-all border ${
-                        isSelected 
-                          ? "bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-900/20" 
-                          : "bg-[#161f32] border-slate-700 text-slate-400 hover:border-slate-500"
-                      }`}
-                    >
-                      {type}
-                    </button>
-                  );
-                })}
+              <label className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-500">
+                Broker Type
+              </label>
+
+              <div className="relative">
+                <select
+                  {...register("broker_type")}
+                  className="w-full appearance-none py-3 px-3 pr-10 rounded-lg bg-[#161f32] border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                >
+                  {brokerTypes.map((type) => (
+                    <option key={type} value={type}>
+                      {type.toUpperCase()}
+                    </option>
+                  ))}
+                </select>
+
+                {/* arrow */}
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                  ▼
+                </span>
               </div>
             </div>
 
