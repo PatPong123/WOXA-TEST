@@ -16,18 +16,25 @@ export default function BrokerList({ initialData }: Props) {
     const [brokers, setBrokers] = useState(initialData);
     const [loading, setLoading] = useState(false);
 
-    
+
     useEffect(() => {
         const timer = setTimeout(() => setDebouncedSearch(search), 300);
         return () => clearTimeout(timer);
     }, [search]);
 
     const toggleType = (type: string) => {
+        if (type === "all") {
+            setSelectedTypes([]);
+            return;
+        }
         setSelectedTypes((prev) =>
             prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
         );
     };
-
+    const clearFilters = () => {
+        setSelectedTypes([]);
+        setSearch("");
+    };
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
@@ -49,7 +56,7 @@ export default function BrokerList({ initialData }: Props) {
     }, [debouncedSearch, selectedTypes]);
 
     return (
-      
+
         <div className="min-h-screen bg-background text-foreground font-sans transition-colors duration-500">
 
             {/* --- HEADER SECTION --- */}
@@ -73,19 +80,32 @@ export default function BrokerList({ initialData }: Props) {
                             placeholder="Find brokers..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            
+
                             className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-sm text-slate-900 dark:text-white"
                         />
                     </div>
 
                     {/* Filter Chips */}
+                    {/* Filter Chips */}
                     <div className="flex flex-wrap items-center gap-3">
                         <span className="text-[10px] uppercase tracking-widest text-slate-400 dark:text-gray-500 font-bold mr-2">Asset Focus:</span>
+
+                        {/* ปุ่ม ALL */}
+                        <button
+                            onClick={() => toggleType("all")}
+                            className={`px-5 py-2 rounded-full text-[10px] font-bold transition-all border ${selectedTypes.length === 0
+                                    ? "bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/20"
+                                    : "bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-white/10"
+                                }`}
+                        >
+                            ALL
+                        </button>
+
+                        {/* รายการประเภทต่างๆ */}
                         {["cfd", "bond", "stock", "crypto"].map((type) => (
                             <button
                                 key={type}
                                 onClick={() => toggleType(type)}
-                              
                                 className={`px-5 py-2 rounded-full text-[10px] font-bold transition-all border ${selectedTypes.includes(type)
                                         ? "bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-500/20"
                                         : "bg-slate-100 dark:bg-white/5 border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 hover:bg-slate-200 dark:hover:bg-white/10"
@@ -94,6 +114,16 @@ export default function BrokerList({ initialData }: Props) {
                                 {type.toUpperCase()}
                             </button>
                         ))}
+
+                        {/* ปุ่ม Clear (แสดงเมื่อมีการ Filter เท่านั้น) */}
+                        {(selectedTypes.length > 0 || search !== "") && (
+                            <button
+                                onClick={clearFilters}
+                                className="text-[10px] font-bold text-red-500 hover:text-red-600 dark:text-red-400 underline underline-offset-4 ml-2 transition-colors"
+                            >
+                                CLEAR FILTERS
+                            </button>
+                        )}
                     </div>
                 </div>
             </section>
@@ -108,7 +138,7 @@ export default function BrokerList({ initialData }: Props) {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {brokers.map((b: any) => (
                             <Link key={b.id} href={`/broker/${b.slug}`} className="group">
-                              
+
                                 <div className="bg-white dark:bg-[#0f172a]/50 border border-slate-200 dark:border-white/5 rounded-2xl overflow-hidden transition-all duration-300 group-hover:border-blue-500/50 group-hover:shadow-xl dark:group-hover:shadow-blue-500/10">
                                     {/* Thumbnail */}
                                     <div className="relative h-48 w-full bg-slate-200 dark:bg-gray-800 overflow-hidden">

@@ -39,7 +39,7 @@ export default function Header() {
             <Landmark className="w-6 h-6 text-white" />
           </div>
           <span className="text-xl font-bold tracking-tighter text-gray-900 dark:text-white group-hover:text-primary-blue transition-colors">
-            WOXA<span className="text-primary-blue">INSTITUTION</span>
+            WOXA<span className="text-primary-blue"></span>
           </span>
         </Link>
 

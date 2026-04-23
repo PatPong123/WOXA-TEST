@@ -48,14 +48,14 @@ export default async function BrokerDetailPage({ params }: { params: Promise<{ s
         {/* 2. Content Layer */}
         <div className="container mx-auto px-8 relative z-10">
           <div className="max-w-3xl">
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-2 mt-20">
               <span className="bg-blue-600 px-2 py-0.5 text-[10px] font-bold rounded-sm tracking-widest">
                 INSTITUTIONAL GRADE
               </span>
               <span className="text-blue-400 text-[10px]">★★★★★</span>
             </div>
 
-            <h1 className="text-7xl font-bold mb-6 tracking-tight leading-none">
+            <h1 className="text-7xl font-bold tracking-tight leading-none">
               {broker.name}
             </h1>
 
